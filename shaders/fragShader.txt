@@ -1,0 +1,53 @@
+#version 330 core
+
+const int ENUM_chessBoard = 20;
+const int ENUM_piece_whitePawn = 11;
+const int ENUM_piece_whiteBishop = 10;
+const int ENUM_piece_whiteKnight = 9;
+const int ENUM_piece_whiteRook = 8;
+const int ENUM_piece_whiteKing = 7;
+const int ENUM_piece_whiteQueen = 6;
+const int ENUM_piece_blackPawn = 5;
+const int ENUM_piece_blackBishop = 4;
+const int ENUM_piece_blackKnight = 3;
+const int ENUM_piece_blackRook = 2;
+const int ENUM_piece_blackKing = 1;
+const int ENUM_piece_blackQueen = 0;
+
+
+uniform int objEnum;
+in vec3 fragModelPos;
+out vec4 outputColor;
+
+uniform sampler2D texture_0;
+
+void
+main()
+{
+
+  if((objEnum >= ENUM_piece_blackQueen)&&(objEnum <= ENUM_piece_whitePawn)){
+    float yOffset = 1;
+    if(objEnum >= 6){
+      yOffset = 0.5;
+    }
+    vec2 texturePos = vec2(((objEnum%6)/6.0), yOffset);
+    outputColor = texture(texture_0, texturePos+vec2(fragModelPos.x*(1.0/6.0), (1-fragModelPos.y)*(1.0/2.0)));//6x2 grid
+    return;
+  }
+    
+  switch (objEnum){
+  case ENUM_chessBoard:
+    int x = int(floor(fragModelPos.x*8));
+    int y = int(floor(fragModelPos.y*8));
+    if((x+y)%2 == 0){
+      outputColor = vec4(0.4, 0.2, 0.1, 1);
+    }else{
+      outputColor = vec4(0.8, 0.6, 0.2, 1);
+    }
+    break;
+  default:
+    outputColor = vec4(1, 0, 1, 1);
+    break;
+  }
+  return;
+}

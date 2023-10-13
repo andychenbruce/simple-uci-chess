@@ -1,0 +1,15 @@
+#version 330 core
+
+uniform mat4 MVP;
+uniform int objEnum;
+in vec3 inputPosition;
+out vec3 fragModelPos;
+
+
+void
+main()
+{
+  fragModelPos = inputPosition;
+  gl_Position = MVP*vec4(inputPosition, 1);
+  
+}
