@@ -36,4 +36,4 @@ move.o:		move.cpp $(MOVE_HDRS)
 utils.o:	utils.cpp $(UTILS_HDRS)
 
 clean:
-	rm *~ *.o foo
+	$(RM) *.o foo

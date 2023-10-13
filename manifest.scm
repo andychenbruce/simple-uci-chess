@@ -1,0 +1,9 @@
+(specifications->manifest
+ (list
+  "coreutils"
+  "gcc-toolchain"
+  "make"
+  "pkg-config"
+  "glfw"
+  "glew"
+  "glm"))
